@@ -5,8 +5,9 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, IniPropStorage,
-  ExtCtrls, ComCtrls, db, csvdataset, UniqueInstance, SortGrid, jvCSVBase;
+  locale_de, Classes, SysUtils, Forms,
+  Controls, Graphics, Dialogs, IniPropStorage, ExtCtrls, ComCtrls, DBCtrls,
+  DBGrids, db, SdfData, UniqueInstance;
 
 type
 
@@ -14,13 +15,16 @@ type
 
   TForm1 = class(TForm)
     CoolBar1: TCoolBar;
-    CSVDataset1: TCSVDataset;
     DataSource1: TDataSource;
+    DBGrid1: TDBGrid;
+    DBNavigator1: TDBNavigator;
     IniPropStorage1: TIniPropStorage;
-    jvCSVBase1: TjvCSVBase;
     Panel1: TPanel;
     ProgressBar1: TProgressBar;
+    SdfDataSet1: TSdfDataSet;
     UniqueInstance1: TUniqueInstance;
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+    procedure FormCreate(Sender: TObject);
   private
 
   public
@@ -29,10 +33,45 @@ type
 
 var
   Form1: TForm1;
+  FName : string;
+  lst : TStringList;
 
 implementation
 
 {$R *.lfm}
+
+{ TForm1 }
+
+procedure TForm1.FormCreate(Sender: TObject);
+var line : String;
+begin
+
+  lst := TStringList.Create;
+
+  line := 'Zaehler;Datum;Gattung;Artikel;Preis';
+  lst.Add(line);
+
+
+  FName := ExePath + 'Daten.csv';
+  SDFDataset1.FileName:=FName;
+
+  if not FileExists(FName) then
+  begin
+      ShowMessage(FName + NL + 'erxistiert noch nicht, wird erzeugt');
+      lst.SaveToFile(FName);
+
+
+  end;
+
+  SDFDataset1.Active:=true;
+
+end;
+
+procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+begin
+  canClose := true;
+  FreeAndNil(lst);
+end;
 
 end.
 

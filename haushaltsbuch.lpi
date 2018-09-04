@@ -26,13 +26,13 @@
     </RunParams>
     <RequiredPackages Count="5">
       <Item1>
-        <PackageName Value="FCL"/>
+        <PackageName Value="laz_fpspreadsheet_visual"/>
       </Item1>
       <Item2>
-        <PackageName Value="csvBase"/>
+        <PackageName Value="SDFLaz"/>
       </Item2>
       <Item3>
-        <PackageName Value="laz_sortgrid"/>
+        <PackageName Value="FCL"/>
       </Item3>
       <Item4>
         <PackageName Value="uniqueinstance_package"/>
@@ -63,6 +63,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="../comp"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

@@ -7,16 +7,38 @@ object Form1: TForm1
   ClientHeight = 649
   ClientWidth = 902
   DesignTimePPI = 100
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   SessionProperties = 'Width;Top'
   LCLVersion = '1.9.0.0'
   object Panel1: TPanel
     Left = 0
-    Height = 48
-    Top = 582
+    Height = 28
+    Top = 602
     Width = 902
     Align = alBottom
     Caption = 'Panel1'
+    ClientHeight = 28
+    ClientWidth = 902
     TabOrder = 0
+    object DBNavigator1: TDBNavigator
+      Left = 296
+      Height = 26
+      Top = 1
+      Width = 251
+      BevelOuter = bvNone
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsScaleChilds
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 100
+      ClientHeight = 26
+      ClientWidth = 251
+      DataSource = DataSource1
+      Options = []
+      TabOrder = 0
+    end
   end
   object CoolBar1: TCoolBar
     Left = 0
@@ -33,38 +55,40 @@ object Form1: TForm1
     Align = alBottom
     TabOrder = 2
   end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Height = 530
+    Top = 72
+    Width = 902
+    Align = alClient
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSource1
+    TabOrder = 3
+  end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
-    left = 445
-    top = 275
+    left = 384
+    top = 168
   end
   object UniqueInstance1: TUniqueInstance
-    left = 684
-    top = 272
-  end
-  object jvCSVBase1: TjvCSVBase
-    left = 187
-    top = 318
+    left = 520
+    top = 168
   end
   object DataSource1: TDataSource
-    DataSet = CSVDataset1
-    left = 152
-    top = 160
+    DataSet = SdfDataSet1
+    left = 256
+    top = 168
   end
-  object CSVDataset1: TCSVDataset
-    FieldDefs = <    
-      item
-        Name = 'CSVDataset1Field1'
-        DataType = ftUnknown
-      end>
-    CSVOptions.FirstLineAsFieldNames = False
-    CSVOptions.DefaultFieldLength = 255
-    CSVOptions.Delimiter = ','
-    CSVOptions.QuoteChar = '"'
-    CSVOptions.LineEnding = #10
-    CSVOptions.IgnoreOuterWhitespace = False
-    CSVOptions.QuoteOuterWhitespace = True
-    left = 344
+  object SdfDataSet1: TSdfDataSet
+    FileMustExist = True
+    ReadOnly = False
+    FieldDefs = <>
+    AllowMultiLine = False
+    Delimiter = ';'
+    FirstLineAsSchema = True
+    StripTrailingDelimiters = False
+    left = 128
     top = 168
   end
 end
